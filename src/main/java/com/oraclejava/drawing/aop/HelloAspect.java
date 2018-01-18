@@ -1,11 +1,14 @@
 package com.oraclejava.drawing.aop;
 
+import com.oraclejava.drawing.model.Circle;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.Signature;
 import org.aspectj.lang.annotation.*;
+import org.springframework.stereotype.Component;
 
 @Aspect
+@Component
 public class HelloAspect {
     //메서드 시작할 때 weaving하는 Advice
     @Before("execution(* getName())")
@@ -34,6 +37,12 @@ public class HelloAspect {
     @Around("execution(* getName())")
     public String around(ProceedingJoinPoint pjp) throws Throwable {
             System.out.println("around before");
+
+            if (pjp.getThis() instanceof Circle) {
+                Circle circle = (Circle)pjp.getThis();
+                System.out.println("변경 전 : " + circle);
+                circle.setCheck(true);
+            }
 
             String str = (String)pjp.proceed();
 

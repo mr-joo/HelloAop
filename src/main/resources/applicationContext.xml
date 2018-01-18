@@ -1,20 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<bean id="circle" class="com.oraclejava.drawing.model.Circle">
-		<property name="name" value="보름달"></property>
-	</bean>
-
-	<bean id="triangle" class="com.oraclejava.drawing.model.Triangle">
-		<property name="name" value="삼김"></property>
-	</bean>
-
-	<bean id="service" class="com.oraclejava.drawing.service.ShapeService" autowire="byName"></bean>
-
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-
-	<bean id="hellAspect" class="com.oraclejava.drawing.aop.HelloAspect"></bean>
+    <context:annotation-config></context:annotation-config>
+    <context:component-scan base-package="com.oraclejava.drawing"></context:component-scan>
+    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
 
 </beans>

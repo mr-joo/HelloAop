@@ -11,7 +11,7 @@ public class ShapeMain {
 	public static void main(String[] args) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
-		ShapeService service = (ShapeService)context.getBean("service");
+		ShapeService service = (ShapeService)context.getBean("shapeService");
 
 		Circle circle = service.getCircle();
 		System.out.println(circle.getName());
