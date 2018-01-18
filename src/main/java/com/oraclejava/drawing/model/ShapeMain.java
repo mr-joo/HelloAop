@@ -8,10 +8,11 @@ import com.oraclejava.drawing.service.ShapeService;
 
 public class ShapeMain {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		
 		ShapeService service = (ShapeService)context.getBean("service");
+
 		Circle circle = service.getCircle();
 		System.out.println(circle.getName());
 		

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
 
 	<bean id="circle" class="com.oraclejava.drawing.model.Circle">
 		<property name="name" value="보름달"></property>
@@ -11,9 +11,20 @@
 		<property name="name" value="삼김"></property>
 	</bean>
 
-	<bean id="service" class="com.oraclejava.drawing.service.ShapeService">
-		<property name="circle" ref="circle"></property>
-		<property name="triangle" ref="triangle"></property>
-	</bean>
+	<bean id="service" class="com.oraclejava.drawing.service.ShapeService" autowire="byName"></bean>
+
+	<aop:config>
+		<aop:aspect id ="helloaApect" ref="hellAspect">
+			<aop:pointcut expression="execution(* getName())" id="pc"></aop:pointcut>
+			<aop:before method="before" pointcut-ref="pc"></aop:before>
+			<aop:after method="after" pointcut-ref="pc"></aop:after>
+			<aop:after-returning method="afterReturning" pointcut-ref="pc" returning="retStr"></aop:after-returning>
+			<aop:around method="around" pointcut-ref="pc"></aop:around>
+			<aop:after-throwing method="afterThrowing" pointcut-ref="pc" throwing="ex"></aop:after-throwing>
+		</aop:aspect>
+	</aop:config>
+
+	<bean id="hellAspect" class="com.oraclejava.drawing.aop.HelloAspect"></bean>
+
 
 </beans>
